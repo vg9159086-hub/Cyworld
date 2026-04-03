@@ -1,89 +1,107 @@
 <!DOCTYPE html><html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cyworld</title>  <style>
-    body {
-      font-family: Tahoma, Verdana, sans-serif;
-      background-color: #dcdcdc;
-      margin: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyworld</title><style>
+body {
+  font-family: Tahoma, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+}
 
-    .container {
-      width: 980px;
-      margin: 20px auto;
-      background: #ffffff;
-      border: 1px solid #aaa;
-    }
+.container {
+  width: 1100px;
+  margin: 20px auto;
+  background: #ffffff;
+  border: 2px solid #ff8c42;
+}
 
-    .header {
-      background: #6dbb5a;
-      color: white;
-      padding: 12px;
-      font-size: 18px;
-      font-weight: bold;
-    }
+.header {
+  background: #ff8c42;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
-    .menu {
-      background: #8a8a8a;
-      color: white;
-      padding: 8px;
-    }
+.header img {
+  height: 40px;
+}
 
-    .menu span {
-      margin-right: 20px;
-      cursor: pointer;
-    }
+.menu {
+  background: #ffa366;
+  padding: 10px;
+}
 
-    .layout {
-      display: flex;
-    }
+.menu span {
+  margin-right: 25px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  cursor: pointer;
+}
 
-    .left, .right {
-      width: 200px;
-      padding: 10px;
-    }
+.layout {
+  display: flex;
+  min-height: 700px;
+}
 
-    .center {
-      flex: 1;
-      padding: 10px;
-    }
+.left, .right {
+  width: 220px;
+  padding: 10px;
+}
 
-    .box {
-      border: 1px solid #bbb;
-      margin-bottom: 10px;
-      padding: 10px;
-      font-size: 14px;
-    }
+.center {
+  flex: 1;
+  padding: 10px;
+}
 
-    input {
-      width: 100%;
-      padding: 5px;
-      margin-top: 5px;
-    }
+.box {
+  border: 1px solid #ffb380;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #fff7f0;
+}
 
-    button {
-      margin-top: 8px;
-      padding: 6px;
-      width: 100%;
-      background: #6dbb5a;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+.box img {
+  width: 100%;
+  margin-top: 8px;
+}
 
-    .footer {
-      background: #666;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-size: 12px;
-    }
-  </style></head><body><div class="container">  <div class="header">Rpop World</div>  <div class="menu">
+.news {
+  color: #ff4da6;
+}
+
+input {
+  width: 100%;
+  padding: 6px;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 8px;
+  padding: 7px;
+  width: 100%;
+  background: #ff8c42;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.footer {
+  background: #ff8c42;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-size: 12px;
+}
+</style></head><body><div class="container">  <div class="header">
+    <img src="logo.png" alt="logo">
+    <b>Cyworld</b>
+  </div>  <div class="menu">
     <span>HOME</span>
     <span>COMUNIDADES</span>
     <span>PERFIL</span>
-    <span>QUARTO</span>
+    <span>MINIROOM</span>
   </div>  <div class="layout"><div class="left">
   <div class="box">
     <b>Login</b><br>
@@ -94,20 +112,29 @@
     <button>Entrar</button>
     <button>Criar conta</button>
   </div>
+
+  <div class="box">
+    <b>Pixel</b>
+    <img src="pixel1.jpg">
+  </div>
 </div>
 
 <div class="center">
   <div class="box">
-    <b>Bem-vindo!</b>
-    <p>Seu portal retrô estilo anos 2000.</p>
+    <b>Bem-vindo ao Cyworld!</b>
+    <p>Comunidade retrô inspirada nos anos 2000.</p>
+    <img src="pixel2.jpg">
   </div>
 
-  <div class="box">
+  <div class="box news">
     <b>Notícias</b>
     <ul>
       <li>Girls' Generation retorna para comeback de 20 anos</li>
-      <li>BTS lança "Arirang"</li>
+      <li>BTS lança "Arirang" em novo projeto</li>
       <li>M.I.L.K e Shinvi voltam a ganhar destaque</li>
+      <li>2NE1 pode retornar com novo álbum especial</li>
+      <li>Wonder Girls ganha documentário retrô</li>
+      <li>TVXQ anuncia evento global comemorativo</li>
     </ul>
   </div>
 </div>
@@ -115,7 +142,12 @@
 <div class="right">
   <div class="box">
     <b>Evento</b>
-    <p>Decore seu quarto virtual!</p>
+    <p>Decore seu miniroom e ganhe pontos!</p>
+  </div>
+
+  <div class="box">
+    <b>Destaque</b>
+    <p>Explore perfis e descubra novos artistas!</p>
   </div>
 </div>
 
