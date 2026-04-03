@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="pt-BR">
-<head>
+<!DOCTYPE html><html lang="pt-BR"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cyworld</title><style>
@@ -27,34 +26,49 @@ body {
   gap: 15px;
 }
 
-.header img { height: 40px; }
-
 .menu { background: #ffa366; padding: 10px; }
-.menu span { margin-right: 25px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; }
+.menu span { margin-right: 25px; font-family: 'Courier New', monospace; cursor: pointer; }
 
 .layout { display: flex; min-height: 900px; }
 .left, .right { width: 220px; padding: 10px; }
 .center { flex: 1; padding: 10px; }
 
 .box { border: 1px solid #ffb380; margin-bottom: 12px; padding: 10px; background: #fff7f0; }
-.box img { width: 100%; margin-top: 8px; }
 
-.news { color: #ff4da6; }
-.comment { font-size: 13px; margin-bottom: 8px; }
+/* MINIROOM */
+.miniroom {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border: 2px solid #aaa;
+  overflow: hidden;
+}
 
-input { width: 100%; padding: 6px; margin-top: 5px; }
-button { margin-top: 8px; padding: 7px; width: 100%; background: #ff8c42; color: white; border: none; cursor: pointer; }
+.miniroom .bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#avatar {
+  width: 60px;
+  position: absolute;
+  top: 150px;
+  left: 120px;
+  cursor: grab;
+}
 
 .footer { background: #ff8c42; color: white; text-align: center; padding: 12px; font-size: 12px; }
-</style></head><body><div class="container">  <div class="header">
-    <img src="logo.png" alt="logo">
-    <b>Cyworld</b>
-  </div>  <div class="menu">
-    <span>HOME</span>
-    <span>COMUNIDADES</span>
-    <span>PERFIL</span>
-    <span>MINIROOM</span>
-  </div>  <div class="layout"><div class="left">
+</style></head><body><div class="container"><div class="header">
+  <img src="logo.png" style="height:40px;">
+  <b>Cyworld</b>
+</div><div class="menu">
+  <span onclick="mostrarHome()">HOME</span>
+  <span>COMUNIDADES</span>
+  <span onclick="mostrarPerfil()">PERFIL</span>
+  <span>MINIROOM</span>
+</div><!-- HOME --><div id="home">
+<div class="layout"><div class="left">
   <div class="box" id="loginBox">
     <b>Login</b><br>
     Usuário:
@@ -64,103 +78,80 @@ button { margin-top: 8px; padding: 7px; width: 100%; background: #ff8c42; color:
     <button onclick="login()">Entrar</button>
     <button onclick="registrar()">Criar conta</button>
   </div>
-
+</div><div class="center">
   <div class="box">
-    <b>Summer Vacation</b>
-    <img src="pixel2.jpg">
-  </div>
-</div>
-
-<div class="center">
-  <div class="box" id="welcomeBox">
     <b>Bem-vindo ao Cyworld!</b>
     <p id="welcomeText">Comunidade retrô inspirada nos anos 2000.</p>
-    <img src="pixel1.jpg">
   </div>
-
-  <div class="box news">
-    <b>Notícias</b>
-    <ul>
-      <li>Girls' Generation retorna para comeback de 20 anos</li>
-      <li>BTS lança "Arirang" em novo projeto</li>
-      <li>M.I.L.K e Shinvi voltam a ganhar destaque</li>
-      <li>2NE1 pode retornar com novo álbum especial</li>
-      <li>Wonder Girls ganha documentário retrô</li>
-      <li>TVXQ anuncia evento global comemorativo</li>
-    </ul>
-  </div>
-
-  <div class="box">
-    <b>Comentários</b>
-    <div class="comment">lara0987: wow, snsd sempre estará em meu coração!!</div>
-    <div class="comment">fufurin22: Shinvi são minhas favoritas... Eu as amo ^^</div>
-    <div class="comment">holl@nd567: sou novo aqui... Estou a personalizar meu miniroom ;)</div>
-  </div>
-
-  <div class="box">
-    <b>Usuários Online</b>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px;text-align:center;">
-      <div><img src="person1.jpg" style="width:80px;height:80px;object-fit:cover;"><br>Jessica</div>
-      <div><img src="person2.jpg" style="width:80px;height:80px;object-fit:cover;"><br>Brenda</div>
-      <div><img src="person3.jpg" style="width:80px;height:80px;object-fit:cover;"><br>Jenna</div>
-      <div><img src="person4.jpg" style="width:80px;height:80px;object-fit:cover;"><br>Sophia</div>
-      <div><img src="person5.jpg" style="width:80px;height:80px;object-fit:cover;"><br>Lexis</div>
-      <div><img src="person6.jpg" style="width:80px;height:80px;object-fit:cover;"><br>Yuna</div>
-    </div>
-  </div>
+</div><div class="right"></div></div>
+</div><!-- PERFIL --><div id="perfil" style="display:none;"><div class="layout"><div class="left">
+<div class="box">
+  <b>Perfil</b><br><br>
+  <img id="avatarPreview" src="avatar1.png" style="width:100px;"><br><br>
+  <b id="nomeUser">Usuário</b><br><br>
+  Status:<br>
+  <input type="text"><br><br>
+  Avatar:<br>
+  <select onchange="trocarAvatar(this.value)">
+    <option value="avatar1.png">Feminino</option>
+    <option value="avatar2.png">Masculino</option>
+  </select>
 </div>
+</div><div class="center">
+<div class="box">
+  <b>Miniroom</b><br><br>  <div class="miniroom">
+    <img id="roomBg" src="room1.gif" class="bg">
+    <img id="avatar" src="avatar1.png">
+  </div>Cenário:<br> <select onchange="trocarRoom(this.value)"> <script> for(let i=1;i<=12;i++){ document.write(<option value=\"room${i}.gif\">Room ${i}</option>); } </script> </select>
 
-<div class="right">
-  <div class="box">
-    <b>Evento</b>
-    <p>Decore seu miniroom e ganhe pontos!</p>
-  </div>
-
-  <div class="box">
-    <b>Destaque</b>
-    <p>Explore perfis e descubra novos artistas!</p>
-  </div>
 </div>
-
-  </div>  <div class="footer">
-    © 2006 Cyworld - Otimizado para Internet Explorer 6
-  </div></div><!-- FIREBASE --><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script><script>
-const firebaseConfig = {
-  apiKey: "AIzaSyAHdlW4ro1ot0Tcc5810ufCBnyU3f2uI-M",
-  authDomain: "cyworld-24d00.firebaseapp.com",
-  projectId: "cyworld-24d00",
-  storageBucket: "cyworld-24d00.firebasestorage.app",
-  messagingSenderId: "972543536924",
-  appId: "1:972543536924:web:6b3d375e75ff17c0f514d9"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-function getData() {
-  const usuario = document.getElementById("user").value;
-  const senha = document.getElementById("pass").value;
-  const emailFake = usuario + "@cyworld.com";
-  return { usuario, senha, emailFake };
+</div><div class="right">
+<div class="box">
+  <b>What friends say</b>
+  <p>"Você é muito legal!" 👍</p>
+</div>
+</div></div></div><div class="footer">
+  © 2006 Cyworld
+</div></div><script>
+function mostrarPerfil(){
+  document.getElementById("home").style.display = "none";
+  document.getElementById("perfil").style.display = "block";
 }
 
-function login() {
-  const { usuario, senha, emailFake } = getData();
-
-  auth.signInWithEmailAndPassword(emailFake, senha)
-    .then(() => {
-      document.getElementById("welcomeText").innerText = "Logado como " + usuario;
-      document.getElementById("loginBox").style.display = "none";
-    })
-    .catch(() => alert("Erro no login"));
+function mostrarHome(){
+  document.getElementById("home").style.display = "block";
+  document.getElementById("perfil").style.display = "none";
 }
 
-function registrar() {
-  const { usuario, senha, emailFake } = getData();
-
-  auth.createUserWithEmailAndPassword(emailFake, senha)
-    .then(() => alert("Conta criada!"))
-    .catch(() => alert("Erro ao criar conta"));
+function trocarAvatar(src){
+  document.getElementById("avatar").src = src;
+  document.getElementById("avatarPreview").src = src;
 }
+
+function trocarRoom(src){
+  document.getElementById("roomBg").src = src;
+}
+
+// DRAG
+const avatar = document.getElementById("avatar");
+let isDragging = false;
+let offsetX, offsetY;
+
+avatar.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  offsetX = e.clientX - avatar.offsetLeft;
+  offsetY = e.clientY - avatar.offsetTop;
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    avatar.style.left = (e.clientX - offsetX) + "px";
+    avatar.style.top = (e.clientY - offsetY) + "px";
+  }
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+});
 </script></body>
 </html>
