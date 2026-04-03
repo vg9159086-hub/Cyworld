@@ -27,81 +27,25 @@ body {
   gap: 15px;
 }
 
-.header img {
-  height: 40px;
-}
+.header img { height: 40px; }
 
-.menu {
-  background: #ffa366;
-  padding: 10px;
-}
+.menu { background: #ffa366; padding: 10px; }
+.menu span { margin-right: 25px; font-family: 'Courier New', monospace; font-size: 14px; cursor: pointer; }
 
-.menu span {
-  margin-right: 25px;
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  cursor: pointer;
-}
+.layout { display: flex; min-height: 900px; }
+.left, .right { width: 220px; padding: 10px; }
+.center { flex: 1; padding: 10px; }
 
-.layout {
-  display: flex;
-  min-height: 900px;
-}
+.box { border: 1px solid #ffb380; margin-bottom: 12px; padding: 10px; background: #fff7f0; }
+.box img { width: 100%; margin-top: 8px; }
 
-.left, .right {
-  width: 220px;
-  padding: 10px;
-}
+.news { color: #ff4da6; }
+.comment { font-size: 13px; margin-bottom: 8px; }
 
-.center {
-  flex: 1;
-  padding: 10px;
-}
+input { width: 100%; padding: 6px; margin-top: 5px; }
+button { margin-top: 8px; padding: 7px; width: 100%; background: #ff8c42; color: white; border: none; cursor: pointer; }
 
-.box {
-  border: 1px solid #ffb380;
-  margin-bottom: 12px;
-  padding: 10px;
-  background: #fff7f0;
-}
-
-.box img {
-  width: 100%;
-  margin-top: 8px;
-}
-
-.news {
-  color: #ff4da6;
-}
-
-.comment {
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-
-input {
-  width: 100%;
-  padding: 6px;
-  margin-top: 5px;
-}
-
-button {
-  margin-top: 8px;
-  padding: 7px;
-  width: 100%;
-  background: #ff8c42;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.footer {
-  background: #ff8c42;
-  color: white;
-  text-align: center;
-  padding: 12px;
-  font-size: 12px;
-}
+.footer { background: #ff8c42; color: white; text-align: center; padding: 12px; font-size: 12px; }
 </style></head><body><div class="container">  <div class="header">
     <img src="logo.png" alt="logo">
     <b>Cyworld</b>
@@ -111,14 +55,14 @@ button {
     <span>PERFIL</span>
     <span>MINIROOM</span>
   </div>  <div class="layout"><div class="left">
-  <div class="box">
+  <div class="box" id="loginBox">
     <b>Login</b><br>
-    Email:
-    <input type="text">
+    Usuário:
+    <input type="text" id="user">
     Senha:
-    <input type="password">
-    <button>Entrar</button>
-    <button>Criar conta</button>
+    <input type="password" id="pass">
+    <button onclick="login()">Entrar</button>
+    <button onclick="registrar()">Criar conta</button>
   </div>
 
   <div class="box">
@@ -128,9 +72,9 @@ button {
 </div>
 
 <div class="center">
-  <div class="box">
+  <div class="box" id="welcomeBox">
     <b>Bem-vindo ao Cyworld!</b>
-    <p>Comunidade retrô inspirada nos anos 2000.</p>
+    <p id="welcomeText">Comunidade retrô inspirada nos anos 2000.</p>
     <img src="pixel1.jpg">
   </div>
 
@@ -180,5 +124,43 @@ button {
 
   </div>  <div class="footer">
     © 2006 Cyworld - Otimizado para Internet Explorer 6
-  </div></div></body>
+  </div></div><!-- FIREBASE --><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script><script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAHdlW4ro1ot0Tcc5810ufCBnyU3f2uI-M",
+  authDomain: "cyworld-24d00.firebaseapp.com",
+  projectId: "cyworld-24d00",
+  storageBucket: "cyworld-24d00.firebasestorage.app",
+  messagingSenderId: "972543536924",
+  appId: "1:972543536924:web:6b3d375e75ff17c0f514d9"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+function getData() {
+  const usuario = document.getElementById("user").value;
+  const senha = document.getElementById("pass").value;
+  const emailFake = usuario + "@cyworld.com";
+  return { usuario, senha, emailFake };
+}
+
+function login() {
+  const { usuario, senha, emailFake } = getData();
+
+  auth.signInWithEmailAndPassword(emailFake, senha)
+    .then(() => {
+      document.getElementById("welcomeText").innerText = "Logado como " + usuario;
+      document.getElementById("loginBox").style.display = "none";
+    })
+    .catch(() => alert("Erro no login"));
+}
+
+function registrar() {
+  const { usuario, senha, emailFake } = getData();
+
+  auth.createUserWithEmailAndPassword(emailFake, senha)
+    .then(() => alert("Conta criada!"))
+    .catch(() => alert("Erro ao criar conta"));
+}
+</script></body>
 </html>
