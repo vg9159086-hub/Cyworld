@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyworld</title><style>
+body {
+  font-family: Tahoma, Verdana, sans-serif;
+  background-image: url('fundo.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+}
+
+.container {
+  width: 1100px;
+  margin: 20px auto;
+  background: #ffffff;
+  border: 2px solid #ff8c42;
+}
+
+.header {
+  background: #ff8c42;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu { background: #ffa366; padding: 10px; }
+.menu span { margin-right: 25px; font-family: 'Courier New', monospace; cursor: pointer; }
+
+.layout { display: flex; min-height: 900px; }
+.left, .right { width: 220px; padding: 10px; }
+.center { flex: 1; padding: 10px; }
+
+.box { border: 1px solid #ffb380; margin-bottom: 12px; padding: 10px; background: #fff7f0; }
+
+/* MINIROOM */
+.miniroom {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border: 2px solid #aaa;
+  overflow: hidden;
+}
+
+.miniroom .bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#avatar {
+  width: 60px;
+  position: absolute;
+  top: 150px;
+  left: 120px;
+  cursor: grab;
+}
+
+.footer { background: #ff8c42; color: white; text-align: center; padding: 12px; font-size: 12px; }
+</style></head><body><div class="container"><div class="header">
+  <img src="logo.png" style="height:40px;">
+  <b>Cyworld</b>
+</div><div class="menu">
+  <span onclick="mostrarHome()">HOME</span>
+  <span>COMUNIDADES</span>
+  <span onclick="mostrarPerfil()">PERFIL</span>
+  <span>MINIROOM</span>
+</div><!-- HOME --><div id="home">
+<div class="layout"><div class="left">
+  <div class="box" id="loginBox">
+    <b>Login</b><br>
+    Usuário:
+    <input type="text" id="user">
+    Senha:
+    <input type="password" id="pass">
+    <button onclick="login()">Entrar</button>
+    <button onclick="registrar()">Criar conta</button>
+  </div>
+</div><div class="center">
+  <div class="box">
+    <b>Bem-vindo ao Cyworld!</b>
+    <p id="welcomeText">Comunidade retrô inspirada nos anos 2000.</p>
+  </div>
+</div><div class="right"></div></div>
+</div><!-- PERFIL --><div id="perfil" style="display:none;"><div class="layout"><div class="left">
+<div class="box">
+  <b>Perfil</b><br><br>
+  <img id="avatarPreview" src="avatar1.png" style="width:100px;"><br><br>
+  <b id="nomeUser">Usuário</b><br><br>
+  Status:<br>
+  <input type="text"><br><br>
+  Avatar:<br>
+  <select onchange="trocarAvatar(this.value)">
+    <option value="avatar1.png">Feminino</option>
+    <option value="avatar2.png">Masculino</option>
+  </select>
+</div>
+</div><div class="center">
+<div class="box">
+  <b>Miniroom</b><br><br>  <div class="miniroom">
+    <img id="roomBg" src="room1.gif" class="bg">
+    <img id="avatar" src="avatar1.png">
+  </div>Cenário:<br> <select onchange="trocarRoom(this.value)"> <script> for(let i=1;i<=12;i++){ document.write(<option value=\"room${i}.gif\">Room ${i}</option>); } </script> </select>
+
+</div>
+</div><div class="right">
+<div class="box">
+  <b>What friends say</b>
+  <p>"Você é muito legal!" 👍</p>
+</div>
+</div></div></div><div class="footer">
+  © 2006 Cyworld
+</div></div><script>
+function mostrarPerfil(){
+  document.getElementById("home").style.display = "none";
+  document.getElementById("perfil").style.display = "block";
+}
+
+function mostrarHome(){
+  document.getElementById("home").style.display = "block";
+  document.getElementById("perfil").style.display = "none";
+}
+
+function trocarAvatar(src){
+  document.getElementById("avatar").src = src;
+  document.getElementById("avatarPreview").src = src;
+}
+
+function trocarRoom(src){
+  document.getElementById("roomBg").src = src;
+}
+
+// DRAG
+const avatar = document.getElementById("avatar");
+let isDragging = false;
+let offsetX, offsetY;
+
+avatar.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  offsetX = e.clientX - avatar.offsetLeft;
+  offsetY = e.clientY - avatar.offsetTop;
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    avatar.style.left = (e.clientX - offsetX) + "px";
+    avatar.style.top = (e.clientY - offsetY) + "px";
+  }
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+});
+</script></body>
+  </html>
