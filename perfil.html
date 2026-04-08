@@ -3,158 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perfil - Cyworld</title>
+<title>Cyworld Perfil</title>
 
 <style>
 body {
-  font-family: Tahoma;
-  background-image: url('background1.gif');
-  background-size: cover;
   margin: 0;
+  background-size: cover;
+  font-family: Tahoma;
 }
 
-.container {
-  width: 1100px;
+/* ÁREA PRINCIPAL */
+.perfil-container {
+  width: 900px;
+  height: 600px;
   margin: auto;
-  background: white;
-  border: 2px solid #ff8c42;
+  position: relative;
 }
 
-.header {
-  background: #ff8c42;
-  padding: 15px;
-  display: flex;
-  align-items: center;
+/* PAPEL */
+.perfil-base {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.menu {
-  background: #ffa366;
-  padding: 10px;
+/* FOTO PERFIL */
+.foto {
+  position: absolute;
+  top: 90px;
+  left: 60px;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
-.menu span {
-  margin-right: 20px;
-  cursor: pointer;
+/* NOME */
+.nome {
+  position: absolute;
+  top: 250px;
+  left: 70px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.layout {
-  display: flex;
-}
-
-.left {
-  width: 250px;
-  padding: 10px;
-}
-
-.center {
-  flex: 1;
-  padding: 10px;
-}
-
-.box {
-  background: #fff7f0;
-  border: 1px solid #ffb380;
-  margin-bottom: 10px;
-  padding: 10px;
+/* STATUS */
+.status {
+  position: absolute;
+  top: 310px;
+  left: 60px;
+  width: 150px;
 }
 
 /* MINIROOM */
 .miniroom {
-  position: relative;
-  width: 100%;
-  height: 300px;
+  position: absolute;
+  top: 180px;
+  left: 300px;
+  width: 450px;
+  height: 200px;
   overflow: hidden;
 }
 
-.miniroom img.bg {
+/* FUNDO ROOM */
+.roomBg {
   width: 100%;
   height: 100%;
 }
 
+/* AVATAR */
 #avatar {
-  width: 90px; /* maior */
   position: absolute;
-  top: 120px;
-  left: 100px;
-  cursor: grab;
+  width: 110px;
+  top: 90px;
+  left: 150px;
+}
+
+/* TEXTO NEWS */
+.news {
+  position: absolute;
+  top: 70px;
+  left: 280px;
+  width: 400px;
+  font-size: 14px;
+}
+
+/* WHAT FRIENDS SAY */
+.friends {
+  position: absolute;
+  bottom: 60px;
+  left: 300px;
+  font-weight: bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="perfil-container">
 
-<div class="header">
-  <img src="logo.png" style="height:40px;">
-  <b>Cyworld - Perfil</b>
+<!-- BASE -->
+<img src="background1.gif" class="perfil-base" id="bg">
+
+<!-- FOTO -->
+<img src="avatar1.png" class="foto" id="fotoPerfil">
+
+<!-- NOME -->
+<div class="nome" id="nomeUser">Usuário</div>
+
+<!-- STATUS -->
+<input class="status" id="statusInput">
+
+<!-- UPDATE NEWS -->
+<div class="news" id="news">
+UPDATE NEWS!<br>
+Você entrou no perfil!
 </div>
 
-<div class="menu">
-  <span onclick="location.href='index.html'">HOME</span>
-  <span onclick="location.href='diario.html'">DIÁRIO</span>
-  <span onclick="location.href='galeria.html'">GALERIA</span>
-  <span onclick="location.href='info.html'">INFORMAÇÕES</span>
-  <span onclick="location.href='edit.html'">EDITAR</span>
-</div>
-
-<div class="layout">
-
-<div class="left">
-<div class="box">
-
-<img id="avatarPreview" src="avatar1.png" style="width:120px;"><br><br>
-
-<b id="nomeUser">Usuário</b><br><br>
-
-Status:<br>
-<input id="status"><br><br>
-
-Avatar:<br>
-<select onchange="trocarAvatar(this.value)">
-<script>
-for(let i=1;i<=8;i++){
-  document.write(`<option value="avatar${i}.png">Avatar ${i}</option>`)
-}
-</script>
-</select>
-
-</div>
-</div>
-
-<div class="center">
-
-<div class="box">
-<b>UPDATE NEWS</b>
-<p id="news">Você entrou no perfil!</p>
-</div>
-
-<div class="box">
-<b>Miniroom</b>
-
+<!-- MINIROOM -->
 <div class="miniroom">
-<img id="roomBg" src="room1.gif" class="bg">
-<img id="avatar" src="avatar1.png">
+  <img src="room1.gif" class="roomBg" id="roomBg">
+  <img src="avatar1.png" id="avatar">
 </div>
 
-<select onchange="trocarRoom(this.value)">
-<script>
-for(let i=1;i<=72;i++){
- document.write(`<option value="room${i}.gif">Room ${i}</option>`)
-}
-</script>
-</select>
-
-</div>
-
-<div class="box">
-<b>What friends say</b>
-<p>“OMG SLAY!!”</p>
-<p>“Lindo!!!! 😭💖”</p>
-</div>
-
-</div>
-
+<!-- FRIENDS -->
+<div class="friends">
+OMG SLAY!! lindo!!!!
 </div>
 
 </div>
@@ -166,74 +141,53 @@ for(let i=1;i<=72;i++){
 <script>
 const firebaseConfig = {
  apiKey: "AIzaSyAHdlW4ro1ot0Tcc5810ufCBnyU3f2uI-M",
- authDomain: "cyworld-24d00.firebaseapp.com",
- projectId: "cyworld-24d00",
- storageBucket: "cyworld-24d00.firebasestorage.app",
- messagingSenderId: "972543536924",
- appId: "1:972543536924:web:6b3d375e75ff17c0f514d9"
+ authDomain: "cyworld-24d00.firebaseapp.com"
 };
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// 🔥 mantém login
-auth.onAuthStateChanged(user => {
+/* LOGIN FIX */
+auth.onAuthStateChanged(user=>{
  if(user){
-   let nome = user.email.split("@")[0];
-   document.getElementById("nomeUser").innerText = nome;
+  let nome = user.email.split("@")[0];
+  document.getElementById("nomeUser").innerText = "Perfil de " + nome;
  } else {
-   location.href = "index.html";
+  location.href = "index.html";
  }
 });
 
-// trocar avatar
-function trocarAvatar(src){
- document.getElementById("avatar").src = src;
- document.getElementById("avatarPreview").src = src;
-}
-
-// trocar room
-function trocarRoom(src){
- document.getElementById("roomBg").src = src;
-}
-
-// 🧠 DRAG MOBILE + PC
+/* DRAG MOBILE + PC */
 let avatar = document.getElementById("avatar");
 
-avatar.onmousedown = dragMouse;
+avatar.onmousedown = drag;
 avatar.ontouchstart = dragTouch;
 
-function dragMouse(e){
- e.preventDefault();
- document.onmousemove = move;
- document.onmouseup = () => document.onmousemove = null;
+function drag(e){
+ document.onmousemove = (ev)=>{
+  avatar.style.left = ev.pageX - 400 + "px";
+  avatar.style.top = ev.pageY - 250 + "px";
+ };
+ document.onmouseup = ()=> document.onmousemove = null;
 }
 
 function dragTouch(e){
- let touch = e.touches[0];
- document.ontouchmove = moveTouch;
- document.ontouchend = () => document.ontouchmove = null;
+ document.ontouchmove = (ev)=>{
+  let t = ev.touches[0];
+  avatar.style.left = t.pageX - 400 + "px";
+  avatar.style.top = t.pageY - 250 + "px";
+ };
+ document.ontouchend = ()=> document.ontouchmove = null;
 }
 
-function move(e){
- avatar.style.left = e.pageX - 50 + "px";
- avatar.style.top = e.pageY - 200 + "px";
-}
-
-function moveTouch(e){
- let t = e.touches[0];
- avatar.style.left = t.pageX - 50 + "px";
- avatar.style.top = t.pageY - 200 + "px";
-
-  let dados = JSON.parse(localStorage.getItem("perfil"));
+/* CARREGAR DADOS */
+let dados = JSON.parse(localStorage.getItem("perfil"));
 
 if(dados){
  document.getElementById("avatar").src = dados.avatar;
  document.getElementById("roomBg").src = dados.room;
- document.body.style.backgroundImage = `url(${dados.bg})`;
- document.getElementById("nomeUser").style.color = dados.cor;
-}
-  
+ document.getElementById("bg").src = dados.bg;
+ document.getElementById("statusInput").value = dados.status;
 }
 </script>
 
