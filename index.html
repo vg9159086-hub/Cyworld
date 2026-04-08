@@ -155,6 +155,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+// pegar dados
 function getData() {
   const usuario = document.getElementById("user").value;
   const senha = document.getElementById("pass").value;
@@ -162,23 +163,50 @@ function getData() {
   return { usuario, senha, emailFake };
 }
 
+// LOGIN
 function login() {
   const { usuario, senha, emailFake } = getData();
 
   auth.signInWithEmailAndPassword(emailFake, senha)
-    .then(() => {
-      document.getElementById("welcomeText").innerText = "Logado como " + usuario;
-      document.getElementById("loginBox").style.display = "none";
-    })
     .catch(() => alert("Erro no login"));
 }
 
+// REGISTRAR
 function registrar() {
   const { usuario, senha, emailFake } = getData();
 
   auth.createUserWithEmailAndPassword(emailFake, senha)
     .then(() => alert("Conta criada!"))
     .catch(() => alert("Erro ao criar conta"));
+}
+
+// 🔥 MANTER LOGIN EM TODAS AS PÁGINAS
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    const nome = user.email.split("@")[0];
+
+    document.getElementById("welcomeText").innerText = "Logado como " + nome;
+    document.getElementById("loginBox").style.display = "none";
+
+    // adiciona botão sair se não existir
+    if (!document.getElementById("logoutBtn")) {
+      const btn = document.createElement("button");
+      btn.innerText = "Sair";
+      btn.id = "logoutBtn";
+      btn.onclick = logout;
+      document.getElementById("loginBox").appendChild(btn);
+    }
+
+  } else {
+    document.getElementById("loginBox").style.display = "block";
+  }
+});
+
+// LOGOUT
+function logout() {
+  auth.signOut().then(() => {
+    location.reload();
+  });
 }
 </script>
 
