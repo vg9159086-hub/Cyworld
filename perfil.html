@@ -7,16 +7,16 @@
 
 <style>
 body {
-  font-family: Tahoma, Verdana, sans-serif;
-  background-image: url('fundo.gif');
+  font-family: Tahoma;
+  background-image: url('background1.gif');
   background-size: cover;
   margin: 0;
 }
 
 .container {
   width: 1100px;
-  margin: 20px auto;
-  background: #ffffff;
+  margin: auto;
+  background: white;
   border: 2px solid #ff8c42;
 }
 
@@ -25,7 +25,6 @@ body {
   padding: 15px;
   display: flex;
   align-items: center;
-  gap: 15px;
 }
 
 .menu {
@@ -34,14 +33,12 @@ body {
 }
 
 .menu span {
-  margin-right: 25px;
-  font-family: 'Courier New', monospace;
+  margin-right: 20px;
   cursor: pointer;
 }
 
 .layout {
   display: flex;
-  min-height: 700px;
 }
 
 .left {
@@ -55,31 +52,30 @@ body {
 }
 
 .box {
-  border: 1px solid #ffb380;
-  margin-bottom: 12px;
-  padding: 10px;
   background: #fff7f0;
+  border: 1px solid #ffb380;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
+/* MINIROOM */
 .miniroom {
+  position: relative;
   width: 100%;
   height: 300px;
-  position: relative;
-  border: 2px solid #aaa;
   overflow: hidden;
 }
 
-.miniroom .bg {
+.miniroom img.bg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 #avatar {
-  width: 60px;
+  width: 90px; /* maior */
   position: absolute;
-  top: 150px;
-  left: 120px;
+  top: 120px;
+  left: 100px;
   cursor: grab;
 }
 </style>
@@ -95,30 +91,33 @@ body {
 </div>
 
 <div class="menu">
-  <span onclick="window.location.href='index.html'">HOME</span>
-  <span>COMUNIDADES</span>
-  <span>PERFIL</span>
-  <span>MINIROOM</span>
+  <span onclick="location.href='index.html'">HOME</span>
+  <span onclick="location.href='diario.html'">DIÁRIO</span>
+  <span onclick="location.href='galeria.html'">GALERIA</span>
+  <span onclick="location.href='info.html'">INFORMAÇÕES</span>
+  <span onclick="location.href='edit.html'">EDITAR</span>
 </div>
 
 <div class="layout">
 
 <div class="left">
 <div class="box">
-  <b>Perfil</b><br><br>
 
-  <img id="avatarPreview" src="avatar1.png" style="width:100px;"><br><br>
+<img id="avatarPreview" src="avatar1.png" style="width:120px;"><br><br>
 
-  <b id="nomeUser">Usuário</b><br><br>
+<b id="nomeUser">Usuário</b><br><br>
 
-  Status:<br>
-  <input type="text" placeholder="Digite seu status 😆"><br><br>
+Status:<br>
+<input id="status"><br><br>
 
-  Avatar:<br>
-  <select onchange="trocarAvatar(this.value)">
-    <option value="avatar1.png">Feminino</option>
-    <option value="avatar2.png">Masculino</option>
-  </select>
+Avatar:<br>
+<select onchange="trocarAvatar(this.value)">
+<script>
+for(let i=1;i<=8;i++){
+  document.write(`<option value="avatar${i}.png">Avatar ${i}</option>`)
+}
+</script>
+</select>
 
 </div>
 </div>
@@ -126,28 +125,32 @@ body {
 <div class="center">
 
 <div class="box">
-  <b>Miniroom</b><br><br>
+<b>UPDATE NEWS</b>
+<p id="news">Você entrou no perfil!</p>
+</div>
 
-  <div class="miniroom">
-    <img id="roomBg" src="room1.gif" class="bg">
-    <img id="avatar" src="avatar1.png">
-  </div>
+<div class="box">
+<b>Miniroom</b>
 
-  Cenário:<br>
-  <select onchange="trocarRoom(this.value)">
-    <script>
-      for(let i=1;i<=12;i++){
-        document.write(`<option value="room${i}.gif">Room ${i}</option>`);
-      }
-    </script>
-  </select>
+<div class="miniroom">
+<img id="roomBg" src="room1.gif" class="bg">
+<img id="avatar" src="avatar1.png">
+</div>
+
+<select onchange="trocarRoom(this.value)">
+<script>
+for(let i=1;i<=72;i++){
+ document.write(`<option value="room${i}.gif">Room ${i}</option>`)
+}
+</script>
+</select>
 
 </div>
 
 <div class="box">
-  <b>What friends say</b>
-  <p>“Você é muito legal!” 👍</p>
-  <p>“Melhores momentos juntos 😭💖”</p>
+<b>What friends say</b>
+<p>“OMG SLAY!!”</p>
+<p>“Lindo!!!! 😭💖”</p>
 </div>
 
 </div>
@@ -162,68 +165,66 @@ body {
 
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyAHdlW4ro1ot0Tcc5810ufCBnyU3f2uI-M",
-  authDomain: "cyworld-24d00.firebaseapp.com",
-  projectId: "cyworld-24d00",
-  storageBucket: "cyworld-24d00.firebasestorage.app",
-  messagingSenderId: "972543536924",
-  appId: "1:972543536924:web:6b3d375e75ff17c0f514d9"
+ apiKey: "AIzaSyAHdlW4ro1ot0Tcc5810ufCBnyU3f2uI-M",
+ authDomain: "cyworld-24d00.firebaseapp.com",
+ projectId: "cyworld-24d00",
+ storageBucket: "cyworld-24d00.firebasestorage.app",
+ messagingSenderId: "972543536924",
+ appId: "1:972543536924:web:6b3d375e75ff17c0f514d9"
 };
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// 🔥 EVITA BUG DE REDIRECIONAMENTO
-let carregou = false;
-
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    const nome = user.email.split("@")[0];
-    document.getElementById("nomeUser").innerText = nome;
-    carregou = true;
-
-  } else {
-    setTimeout(() => {
-      if (!carregou) {
-        window.location.href = "index.html";
-      }
-    }, 1000);
-  }
+// 🔥 mantém login
+auth.onAuthStateChanged(user => {
+ if(user){
+   let nome = user.email.split("@")[0];
+   document.getElementById("nomeUser").innerText = nome;
+ } else {
+   location.href = "index.html";
+ }
 });
 
-// TROCAR AVATAR
+// trocar avatar
 function trocarAvatar(src){
-  document.getElementById("avatar").src = src;
-  document.getElementById("avatarPreview").src = src;
+ document.getElementById("avatar").src = src;
+ document.getElementById("avatarPreview").src = src;
 }
 
-// TROCAR CENÁRIO
+// trocar room
 function trocarRoom(src){
-  document.getElementById("roomBg").src = src;
+ document.getElementById("roomBg").src = src;
 }
 
-// ARRASTAR AVATAR
-const avatar = document.getElementById("avatar");
+// 🧠 DRAG MOBILE + PC
+let avatar = document.getElementById("avatar");
 
-let isDragging = false;
-let offsetX, offsetY;
+avatar.onmousedown = dragMouse;
+avatar.ontouchstart = dragTouch;
 
-avatar.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  offsetX = e.clientX - avatar.offsetLeft;
-  offsetY = e.clientY - avatar.offsetTop;
-});
+function dragMouse(e){
+ e.preventDefault();
+ document.onmousemove = move;
+ document.onmouseup = () => document.onmousemove = null;
+}
 
-document.addEventListener("mousemove", (e) => {
-  if (isDragging) {
-    avatar.style.left = (e.clientX - offsetX) + "px";
-    avatar.style.top = (e.clientY - offsetY) + "px";
-  }
-});
+function dragTouch(e){
+ let touch = e.touches[0];
+ document.ontouchmove = moveTouch;
+ document.ontouchend = () => document.ontouchmove = null;
+}
 
-document.addEventListener("mouseup", () => {
-  isDragging = false;
-});
+function move(e){
+ avatar.style.left = e.pageX - 50 + "px";
+ avatar.style.top = e.pageY - 200 + "px";
+}
+
+function moveTouch(e){
+ let t = e.touches[0];
+ avatar.style.left = t.pageX - 50 + "px";
+ avatar.style.top = t.pageY - 200 + "px";
+}
 </script>
 
 </body>
