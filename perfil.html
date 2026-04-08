@@ -1,13 +1,15 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyworld</title><style>
+<title>Perfil - Cyworld</title>
+
+<style>
 body {
   font-family: Tahoma, Verdana, sans-serif;
   background-image: url('fundo.gif');
   background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   margin: 0;
 }
 
@@ -26,16 +28,39 @@ body {
   gap: 15px;
 }
 
-.menu { background: #ffa366; padding: 10px; }
-.menu span { margin-right: 25px; font-family: 'Courier New', monospace; cursor: pointer; }
+.menu {
+  background: #ffa366;
+  padding: 10px;
+}
 
-.layout { display: flex; min-height: 900px; }
-.left, .right { width: 220px; padding: 10px; }
-.center { flex: 1; padding: 10px; }
+.menu span {
+  margin-right: 25px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+}
 
-.box { border: 1px solid #ffb380; margin-bottom: 12px; padding: 10px; background: #fff7f0; }
+.layout {
+  display: flex;
+  min-height: 700px;
+}
 
-/* MINIROOM */
+.left {
+  width: 250px;
+  padding: 10px;
+}
+
+.center {
+  flex: 1;
+  padding: 10px;
+}
+
+.box {
+  border: 1px solid #ffb380;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #fff7f0;
+}
+
 .miniroom {
   width: 100%;
   height: 300px;
@@ -57,83 +82,129 @@ body {
   left: 120px;
   cursor: grab;
 }
+</style>
+</head>
 
-.footer { background: #ff8c42; color: white; text-align: center; padding: 12px; font-size: 12px; }
-</style></head><body><div class="container"><div class="header">
+<body>
+
+<div class="container">
+
+<div class="header">
   <img src="logo.png" style="height:40px;">
-  <b>Cyworld</b>
-</div><div class="menu">
-  <span onclick="mostrarHome()">HOME</span>
+  <b>Cyworld - Perfil</b>
+</div>
+
+<div class="menu">
+  <span onclick="window.location.href='index.html'">HOME</span>
   <span>COMUNIDADES</span>
-  <span onclick="mostrarPerfil()">PERFIL</span>
+  <span>PERFIL</span>
   <span>MINIROOM</span>
-</div><!-- HOME --><div id="home">
-<div class="layout"><div class="left">
-  <div class="box" id="loginBox">
-    <b>Login</b><br>
-    Usuário:
-    <input type="text" id="user">
-    Senha:
-    <input type="password" id="pass">
-    <button onclick="login()">Entrar</button>
-    <button onclick="registrar()">Criar conta</button>
-  </div>
-</div><div class="center">
-  <div class="box">
-    <b>Bem-vindo ao Cyworld!</b>
-    <p id="welcomeText">Comunidade retrô inspirada nos anos 2000.</p>
-  </div>
-</div><div class="right"></div></div>
-</div><!-- PERFIL --><div id="perfil" style="display:none;"><div class="layout"><div class="left">
+</div>
+
+<div class="layout">
+
+<div class="left">
 <div class="box">
   <b>Perfil</b><br><br>
+
   <img id="avatarPreview" src="avatar1.png" style="width:100px;"><br><br>
+
   <b id="nomeUser">Usuário</b><br><br>
+
   Status:<br>
-  <input type="text"><br><br>
+  <input type="text" placeholder="Digite seu status 😆"><br><br>
+
   Avatar:<br>
   <select onchange="trocarAvatar(this.value)">
     <option value="avatar1.png">Feminino</option>
     <option value="avatar2.png">Masculino</option>
   </select>
+
 </div>
-</div><div class="center">
+</div>
+
+<div class="center">
+
 <div class="box">
-  <b>Miniroom</b><br><br>  <div class="miniroom">
+  <b>Miniroom</b><br><br>
+
+  <div class="miniroom">
     <img id="roomBg" src="room1.gif" class="bg">
     <img id="avatar" src="avatar1.png">
-  </div>Cenário:<br> <select onchange="trocarRoom(this.value)"> <script> for(let i=1;i<=12;i++){ document.write(<option value=\"room${i}.gif\">Room ${i}</option>); } </script> </select>
+  </div>
+
+  Cenário:<br>
+  <select onchange="trocarRoom(this.value)">
+    <script>
+      for(let i=1;i<=12;i++){
+        document.write(`<option value="room${i}.gif">Room ${i}</option>`);
+      }
+    </script>
+  </select>
 
 </div>
-</div><div class="right">
+
 <div class="box">
   <b>What friends say</b>
-  <p>"Você é muito legal!" 👍</p>
+  <p>“Você é muito legal!” 👍</p>
+  <p>“Melhores momentos juntos 😭💖”</p>
 </div>
-</div></div></div><div class="footer">
-  © 2006 Cyworld
-</div></div><script>
-function mostrarPerfil(){
-  document.getElementById("home").style.display = "none";
-  document.getElementById("perfil").style.display = "block";
-}
 
-function mostrarHome(){
-  document.getElementById("home").style.display = "block";
-  document.getElementById("perfil").style.display = "none";
-}
+</div>
 
+</div>
+
+</div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAHdlW4ro1ot0Tcc5810ufCBnyU3f2uI-M",
+  authDomain: "cyworld-24d00.firebaseapp.com",
+  projectId: "cyworld-24d00",
+  storageBucket: "cyworld-24d00.firebasestorage.app",
+  messagingSenderId: "972543536924",
+  appId: "1:972543536924:web:6b3d375e75ff17c0f514d9"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+// 🔥 EVITA BUG DE REDIRECIONAMENTO
+let carregou = false;
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    const nome = user.email.split("@")[0];
+    document.getElementById("nomeUser").innerText = nome;
+    carregou = true;
+
+  } else {
+    setTimeout(() => {
+      if (!carregou) {
+        window.location.href = "index.html";
+      }
+    }, 1000);
+  }
+});
+
+// TROCAR AVATAR
 function trocarAvatar(src){
   document.getElementById("avatar").src = src;
   document.getElementById("avatarPreview").src = src;
 }
 
+// TROCAR CENÁRIO
 function trocarRoom(src){
   document.getElementById("roomBg").src = src;
 }
 
-// DRAG
+// ARRASTAR AVATAR
 const avatar = document.getElementById("avatar");
+
 let isDragging = false;
 let offsetX, offsetY;
 
@@ -153,5 +224,7 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
   isDragging = false;
 });
-</script></body>
-  </html>
+</script>
+
+</body>
+</html>
