@@ -224,6 +224,16 @@ function moveTouch(e){
  let t = e.touches[0];
  avatar.style.left = t.pageX - 50 + "px";
  avatar.style.top = t.pageY - 200 + "px";
+
+  let dados = JSON.parse(localStorage.getItem("perfil"));
+
+if(dados){
+ document.getElementById("avatar").src = dados.avatar;
+ document.getElementById("roomBg").src = dados.room;
+ document.body.style.backgroundImage = `url(${dados.bg})`;
+ document.getElementById("nomeUser").style.color = dados.cor;
+}
+  
 }
 </script>
 
