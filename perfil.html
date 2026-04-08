@@ -3,85 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perfil - Cyworld</title>
+<title>Perfil</title>
 
 <style>
 body{
   margin:0;
-  background-image: url('background1.gif');
-  background-size: cover;
+  background:black;
 }
 
-/* BASE */
+/* CONTAINER */
 .perfil{
-  width: 1000px;
-  height: 600px;
-  margin: 20px auto;
-  position: relative;
+  position:relative;
+  width:100%;
+  max-width:1000px;
+  margin:auto;
 }
 
-/* PAPEL (IMAGEM BASE) */
-.paper{
+/* IMAGEM BASE (SEU LAYOUT REAL) */
+.base{
   width:100%;
-  position:absolute;
 }
 
 /* FOTO PERFIL */
 .foto{
   position:absolute;
-  top:110px;
-  left:60px;
+  top:120px;
+  left:70px;
   width:140px;
   height:140px;
-  border-radius:15px;
+  border-radius:20px;
   object-fit:cover;
-}
-
-/* NOME */
-.nome{
-  position:absolute;
-  top:260px;
-  left:60px;
-  width:140px;
-  text-align:center;
-  font-weight:bold;
-}
-
-/* LIKE */
-.likes{
-  position:absolute;
-  top:310px;
-  left:60px;
-  width:140px;
-  text-align:center;
-}
-
-/* STATUS */
-.status{
-  position:absolute;
-  top:360px;
-  left:40px;
-  width:180px;
-  font-size:14px;
-}
-
-/* UPDATE */
-.news{
-  position:absolute;
-  top:100px;
-  left:260px;
-  width:400px;
-  font-size:14px;
 }
 
 /* MINIROOM */
 .miniroom{
   position:absolute;
-  top:180px;
-  left:260px;
-  width:400px;
-  height:200px;
-  overflow:hidden;
+  top:210px;
+  left:300px;
+  width:420px;
+  height:220px;
 }
 
 .miniroom img.bg{
@@ -90,42 +50,56 @@ body{
   object-fit:cover;
 }
 
+/* AVATAR */
 #avatar{
   position:absolute;
-  width:80px;
-  top:100px;
+  width:90px;
+  top:110px;
   left:150px;
+}
+
+/* STATUS */
+.status{
+  position:absolute;
+  top:420px;
+  left:70px;
+  width:200px;
+  font-size:14px;
+}
+
+/* UPDATE */
+.news{
+  position:absolute;
+  top:130px;
+  left:300px;
+  width:400px;
+  font-size:14px;
 }
 
 /* FRIENDS */
 .friends{
   position:absolute;
-  top:400px;
-  left:260px;
+  top:450px;
+  left:300px;
   width:400px;
   text-align:center;
 }
 
-/* MENU LATERAL */
-.menu{
+/* MENU (CLIQUE INVISÍVEL) */
+.btn{
   position:absolute;
+  width:200px;
+  height:50px;
   right:20px;
-  top:120px;
-}
-
-.menu div{
-  margin-bottom:15px;
   cursor:pointer;
-  font-weight:bold;
 }
 
-/* PLAYER */
-.player{
-  position:absolute;
-  right:40px;
-  bottom:50px;
-  text-align:center;
-}
+#diario{ top:130px; }
+#galeria{ top:190px; }
+#avisos{ top:250px; }
+#info{ top:310px; }
+#edit{ top:370px; }
+
 </style>
 </head>
 
@@ -133,27 +107,16 @@ body{
 
 <div class="perfil">
 
-<!-- FUNDO COMPLETO -->
-<img src="tela.png" class="paper">
+<!-- SUA IMAGEM COMPLETA -->
+<img src="SEU_LAYOUT.png" class="base">
 
 <!-- FOTO -->
 <img id="fotoPerfil" src="avatar1.png" class="foto">
 
-<!-- NOME -->
-<div class="nome" id="nomeUser">vitor0415</div>
-
-<!-- LIKE -->
-<div class="likes">
-👍 170 &nbsp;&nbsp; 👎 20
-</div>
-
-<!-- STATUS -->
-<div class="status" id="status">today is 😆😘💋</div>
-
 <!-- UPDATE -->
-<div class="news" id="update">
+<div class="news">
 Vitor acabou de fazer uma sessão de fotos<br>
-Vitor postou foto nova em sua Galeria<br>
+Nova foto na galeria<br>
 more...
 </div>
 
@@ -163,32 +126,26 @@ more...
   <img id="avatar" src="avatar1.png">
 </div>
 
+<!-- STATUS -->
+<div class="status" id="status">today is 😆😘💋</div>
+
 <!-- FRIENDS -->
 <div class="friends">
-<b>What friends say:</b><br>
 OMG SLAY!! lindo!!!!
 </div>
 
-<!-- MENU -->
-<div class="menu">
-  <div onclick="ir('diario.html')">DIÁRIO</div>
-  <div onclick="ir('galeria.html')">GALERIA</div>
-  <div onclick="ir('avisos.html')">QUADRO</div>
-  <div onclick="ir('info.html')">INFO</div>
-  <div onclick="ir('edit.html')">EDITAR</div>
-</div>
-
-<!-- PLAYER -->
-<div class="player">
-KISSING YOU - SNSD<br>
-▶️ ⏸ ⏭
-</div>
+<!-- BOTÕES INVISÍVEIS -->
+<div id="diario" class="btn" onclick="ir('diario.html')"></div>
+<div id="galeria" class="btn" onclick="ir('galeria.html')"></div>
+<div id="avisos" class="btn" onclick="ir('avisos.html')"></div>
+<div id="info" class="btn" onclick="ir('info.html')"></div>
+<div id="edit" class="btn" onclick="ir('edit.html')"></div>
 
 </div>
 
 <script>
 
-// carregar dados salvos
+// carregar dados
 function carregar(){
   document.getElementById("status").innerText = localStorage.getItem("status") || "today is 😆";
   document.getElementById("roomBg").src = localStorage.getItem("room") || "room1.gif";
@@ -198,7 +155,6 @@ function carregar(){
 
 carregar();
 
-// navegação
 function ir(p){
   window.location.href = p;
 }
