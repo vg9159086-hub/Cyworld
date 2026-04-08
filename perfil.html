@@ -3,192 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyworld Perfil</title>
+<title>Perfil - Cyworld</title>
 
 <style>
-body {
-  margin: 0;
-  background-size: cover;
+body{
+  margin:0;
   font-family: Tahoma;
+  background-image: url('background1.gif');
+  background-size: cover;
 }
 
-/* ÁREA PRINCIPAL */
-.perfil-container {
-  width: 900px;
-  height: 600px;
-  margin: auto;
+/* CONTAINER */
+.perfil{
+  width: 1000px;
+  margin: 20px auto;
   position: relative;
 }
 
 /* PAPEL */
-.perfil-base {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+.paper{
+  background-image: url('tela.png');
+  background-size: cover;
+  padding: 20px;
+  border-radius: 20px;
 }
 
-/* FOTO PERFIL */
-.foto {
-  position: absolute;
-  top: 90px;
-  left: 60px;
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 15px;
+/* LAYOUT */
+.top{
+  display: flex;
 }
 
-/* NOME */
-.nome {
-  position: absolute;
-  top: 250px;
-  left: 70px;
-  font-size: 20px;
-  font-weight: bold;
+/* ESQUERDA */
+.left{
+  width: 250px;
+  text-align: center;
 }
 
-/* STATUS */
-.status {
-  position: absolute;
-  top: 310px;
-  left: 60px;
+.foto{
   width: 150px;
+  height:150px;
+  border-radius: 20px;
+  border:5px solid hotpink;
+  object-fit: cover;
+}
+
+.nome{
+  font-size: 18px;
+  margin-top:10px;
+}
+
+.like{
+  display:flex;
+  justify-content:space-around;
+  margin-top:10px;
+  font-size:20px;
+}
+
+/* DIREITA */
+.right{
+  flex:1;
+  padding-left:20px;
+}
+
+/* UPDATE */
+.news{
+  font-weight:bold;
+  color: hotpink;
 }
 
 /* MINIROOM */
-.miniroom {
-  position: absolute;
-  top: 180px;
-  left: 300px;
-  width: 450px;
-  height: 200px;
-  overflow: hidden;
-}
-
-/* FUNDO ROOM */
-.roomBg {
+.miniroom{
+  margin-top:10px;
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 250px;
+  border-radius:20px;
+  overflow:hidden;
 }
 
-/* AVATAR */
-#avatar {
-  position: absolute;
-  width: 110px;
-  top: 90px;
-  left: 150px;
+.miniroom img.bg{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* TEXTO NEWS */
-.news {
-  position: absolute;
-  top: 70px;
-  left: 280px;
-  width: 400px;
-  font-size: 14px;
+#avatar{
+  width:80px;
+  position:absolute;
+  top:120px;
+  left:100px;
 }
 
-/* WHAT FRIENDS SAY */
-.friends {
-  position: absolute;
-  bottom: 60px;
-  left: 300px;
-  font-weight: bold;
+/* MENU LATERAL */
+.menu-lateral{
+  position:absolute;
+  right:-150px;
+  top:50px;
+}
+
+.menu-lateral div{
+  background:white;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* PLAYER */
+.player{
+  position:absolute;
+  right:-150px;
+  bottom:20px;
+  background:pink;
+  padding:15px;
+  border-radius:20px;
+  text-align:center;
+}
+
+/* FRIENDS */
+.friends{
+  margin-top:10px;
+  text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<div class="perfil-container">
+<div class="perfil">
 
-<!-- BASE -->
-<img src="background1.gif" class="perfil-base" id="bg">
+<div class="paper">
 
-<!-- FOTO -->
-<img src="avatar1.png" class="foto" id="fotoPerfil">
+<div class="top">
 
-<!-- NOME -->
+<!-- ESQUERDA -->
+<div class="left">
+
+<img id="fotoPerfil" src="avatar1.png" class="foto">
+
 <div class="nome" id="nomeUser">Usuário</div>
 
-<!-- STATUS -->
-<input class="status" id="statusInput">
-
-<!-- UPDATE NEWS -->
-<div class="news" id="news">
-UPDATE NEWS!<br>
-Você entrou no perfil!
+<div class="like">
+👍 <span id="likes">170</span>
+👎 <span id="dislikes">20</span>
 </div>
 
-<!-- MINIROOM -->
+<p id="status">today is: 😆😘💋</p>
+
+</div>
+
+<!-- DIREITA -->
+<div class="right">
+
+<div class="news">UPDATE NEWS!</div>
+<p id="update">Você entrou no perfil!</p>
+
 <div class="miniroom">
-  <img src="room1.gif" class="roomBg" id="roomBg">
-  <img src="avatar1.png" id="avatar">
+<img id="roomBg" src="room1.gif" class="bg">
+<img id="avatar" src="avatar1.png">
 </div>
 
-<!-- FRIENDS -->
 <div class="friends">
+<b>What friends say:</b><br>
 OMG SLAY!! lindo!!!!
 </div>
 
 </div>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</div>
+
+</div>
+
+<!-- MENU LATERAL -->
+<div class="menu-lateral">
+<div onclick="ir('diario.html')">DIÁRIO</div>
+<div onclick="ir('galeria.html')">GALERIA</div>
+<div onclick="ir('avisos.html')">AVISOS</div>
+<div onclick="ir('info.html')">INFO</div>
+<div onclick="ir('edit.html')">EDITAR</div>
+</div>
+
+<!-- PLAYER -->
+<div class="player">
+<b id="musica">KISSING YOU - SNSD</b><br>
+▶️ ⏸ ⏭
+</div>
+
+</div>
 
 <script>
-const firebaseConfig = {
- apiKey: "AIzaSyAHdlW4ro1ot0Tcc5810ufCBnyU3f2uI-M",
- authDomain: "cyworld-24d00.firebaseapp.com"
-};
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-/* LOGIN FIX */
-auth.onAuthStateChanged(user=>{
- if(user){
-  let nome = user.email.split("@")[0];
-  document.getElementById("nomeUser").innerText = "Perfil de " + nome;
- } else {
-  location.href = "index.html";
- }
+// LOGIN (corrige bug)
+firebase.auth().onAuthStateChanged(user=>{
+  if(!user){
+    window.location.href="index.html";
+  }else{
+    document.getElementById("nomeUser").innerText = user.email.split("@")[0];
+  }
 });
 
-/* DRAG MOBILE + PC */
-let avatar = document.getElementById("avatar");
-
-avatar.onmousedown = drag;
-avatar.ontouchstart = dragTouch;
-
-function drag(e){
- document.onmousemove = (ev)=>{
-  avatar.style.left = ev.pageX - 400 + "px";
-  avatar.style.top = ev.pageY - 250 + "px";
- };
- document.onmouseup = ()=> document.onmousemove = null;
+// CARREGAR DADOS SALVOS
+function carregar(){
+  document.getElementById("status").innerText = localStorage.getItem("status") || "today is 😆";
+  document.getElementById("roomBg").src = localStorage.getItem("room") || "room1.gif";
+  document.getElementById("avatar").src = localStorage.getItem("avatar") || "avatar1.png";
+  document.getElementById("fotoPerfil").src = localStorage.getItem("foto") || "avatar1.png";
+  document.body.style.backgroundImage = "url("+ (localStorage.getItem("bg") || "background1.gif") +")";
 }
 
-function dragTouch(e){
- document.ontouchmove = (ev)=>{
-  let t = ev.touches[0];
-  avatar.style.left = t.pageX - 400 + "px";
-  avatar.style.top = t.pageY - 250 + "px";
- };
- document.ontouchend = ()=> document.ontouchmove = null;
+carregar();
+
+// NAVEGAÇÃO
+function ir(pagina){
+  window.location.href = pagina;
 }
 
-/* CARREGAR DADOS */
-let dados = JSON.parse(localStorage.getItem("perfil"));
-
-if(dados){
- document.getElementById("avatar").src = dados.avatar;
- document.getElementById("roomBg").src = dados.room;
- document.getElementById("bg").src = dados.bg;
- document.getElementById("statusInput").value = dados.status;
-}
 </script>
 
 </body>
